@@ -3,6 +3,8 @@ const cors = require("cors");
 const morgan = require("morgan");
 require("dotenv").config();
 
+const connectDB = require("./config/db");
+
 const app = express();
 
 //middleware
@@ -13,5 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.listen(process.env.PORT || 8000, () => {
+  connectDB();
   console.log(`Server is running on port: ${process.env.PORT || 8000}`);
 });
