@@ -18,6 +18,12 @@ const userSchema = new mongoose.Schema(
       unique: true,
     },
 
+    phoneNumber: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+
     password: {
       type: String,
       required: true,
@@ -45,6 +51,13 @@ const userSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Chat",
+      },
+    ],
+
+    favorites: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Bike",
       },
     ],
 
