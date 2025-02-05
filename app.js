@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const connectDB = require("./config/db");
 const indexRoute = require("./routes/index");
+const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 
@@ -15,8 +16,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-//routes
+//end point
 app.use("/api/v1", indexRoute);
+
+//error handler
+app.use(errorHandler);
 
 app.listen(process.env.PORT || 8000, () => {
   connectDB();
