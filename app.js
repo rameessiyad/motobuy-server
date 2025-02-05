@@ -4,6 +4,7 @@ const morgan = require("morgan");
 require("dotenv").config();
 
 const connectDB = require("./config/db");
+const indexRoute = require("./routes/index");
 
 const app = express();
 
@@ -13,6 +14,9 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
+//routes
+app.use("/api/v1", indexRoute);
 
 app.listen(process.env.PORT || 8000, () => {
   connectDB();
