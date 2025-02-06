@@ -28,7 +28,18 @@ module.exports = {
       otpStore[email] = { otp, expiresAt: Date.now() + 5 * 60 * 1000 };
 
       //send otp via email
-      await sendEmail(email, "OTP verification", `Your OTP is : ${otp}`);
+      await sendEmail(
+        email,
+        "OTP verification",
+        `
+        <div style="font-family: Arial, sans-serif; text-align: center;">
+          <h2>OTP Verification</h2>
+          <p>Your OTP is:</p>
+          <h3 style="background: #f4f4f4; padding: 10px; display: inline-block;">${otp}</h3>
+          <p>This OTP is valid for 5 minutes.</p>
+        </div>
+      `
+      );
     } catch (error) {
       next(error);
     }
