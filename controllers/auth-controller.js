@@ -21,7 +21,7 @@ module.exports = {
       }
 
       //generate OTP
-      const otp = generateOTP();
+      const otp = generateOTP;
       console.log(`Generated OTP is : ${otp}`);
 
       //store otp for 5 minutes
