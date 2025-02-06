@@ -3,11 +3,12 @@ const {
   updateUser,
   deleteUser,
 } = require("../controllers/user-controller");
+const { authMiddleware } = require("../middleware/authMiddleware");
 
 const router = require("express").Router();
 
-router.get("/profile/:id", getUser);
-router.patch("/profile/:id", updateUser);
-router.delete("/profile/:id", deleteUser);
+router.get("/profile/:id", authMiddleware, getUser);
+router.patch("/profile/:id", authMiddleware, updateUser);
+router.delete("/profile/:id", authMiddleware, deleteUser);
 
 module.exports = router;
