@@ -31,8 +31,8 @@ const userSchema = new mongoose.Schema(
 
     isVerified: {
       type: Boolean,
-      default: false
-    }, 
+      default: false,
+    },
 
     profilePicture: {
       type: String,
@@ -40,9 +40,19 @@ const userSchema = new mongoose.Schema(
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png",
     },
 
-    location: {
+    state: {
       type: String,
-      max: 50,
+      required: true,
+    },
+
+    district: {
+      type: String,
+      required: true,
+    },
+
+    city: {
+      type: String,
+      required: true,
     },
 
     listings: [

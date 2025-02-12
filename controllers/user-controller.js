@@ -33,7 +33,9 @@ module.exports = {
           username: req.body.username || user.username,
           email: req.body.email || user.email,
           phoneNumber: req.body.phoneNumber || user.phoneNumber,
-          location: req.body.location || user.location,
+          district: req.body.district || user.district,
+          state: req.body.state || user.state,
+          city: req.body.city || user.city,
           profilePicture: imageUrl || user.profilePicture,
         },
         { new: true }

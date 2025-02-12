@@ -80,13 +80,17 @@ module.exports = {
   //@access Public
   register: async (req, res, next) => {
     try {
-      const { username, email, phoneNumber, password, location } = req.body;
+      const { username, email, phoneNumber, password, state, district, city } =
+        req.body;
       const userExists = await User.findOne({
         $or: [{ email }, { phoneNumber }],
       });
 
       if (userExists)
-        return next({ statusCode: 400, message: "email or phone number already exists" });
+        return next({
+          statusCode: 400,
+          message: "email or phone number already exists",
+        });
 
       //hash password
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -99,7 +103,9 @@ module.exports = {
         email,
         phoneNumber,
         password: hashedPassword,
-        location,
+        state,
+        district,
+        city,
         isVerified: true,
         profilePicture: imageUrl,
       });

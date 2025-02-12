@@ -45,7 +45,17 @@ const bikeSchema = new mongoose.Schema(
       min: 100,
     },
 
-    location: {
+    state: {
+      type: String,
+      required: true,
+    },
+
+    district: {
+      type: String,
+      required: true,
+    },
+
+    city: {
       type: String,
       required: true,
     },
