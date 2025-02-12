@@ -4,6 +4,13 @@ const User = require("../models/user-model");
 module.exports = {
   authMiddleware: async (req, res, next) => {
     try {
+      if (!req.headers.authorization) {
+        return next({
+          statusCode: 401,
+          message: "Unauthorized, no token provided",
+        });
+      }
+
       const token = req.headers.authorization.split(" ")[1];
 
       if (!token) {
@@ -14,6 +21,7 @@ module.exports = {
       }
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      console.log(decoded);
       req.user = await User.findById(decoded.userId).select("-password");
       next();
     } catch (error) {

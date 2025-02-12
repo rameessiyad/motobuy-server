@@ -1,6 +1,6 @@
 const sendEmail = require("../config/emailConfig");
-const generateOTP = require("../config/generateOTP");
-const generateToken = require("../config/generateToken");
+const generateOTP = require("../utils/generateOTP");
+const generateToken = require("../utils/generateToken");
 const User = require("../models/user-model");
 const bcrypt = require("bcryptjs");
 
@@ -35,7 +35,7 @@ module.exports = {
         <div style="font-family: Arial, sans-serif; text-align: center;">
           <h2>OTP Verification</h2>
           <p>Your OTP is:</p>
-          <h3 style="background: #f4f4f4; padding: 10px; display: inline-block;">${otp}</h3>
+          <h3 style="background:rgb(244, 244, 244); padding: 10px; display: inline-block;">${otp}</h3>
           <p>This OTP is valid for 5 minutes.</p>
         </div>
       `
