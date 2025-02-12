@@ -3,6 +3,7 @@ const generateOTP = require("../utils/generateOTP");
 const generateToken = require("../utils/generateToken");
 const User = require("../models/user-model");
 const bcrypt = require("bcryptjs");
+const { getFileUrl } = require("../utils/image-upload");
 
 let otpStore = {};
 
@@ -85,10 +86,13 @@ module.exports = {
       });
 
       if (userExists)
-        return next({ statusCode: 400, message: "User already exists" });
+        return next({ statusCode: 400, message: "email or phone number already exists" });
 
       //hash password
       const hashedPassword = await bcrypt.hash(password, 10);
+
+      //image url generation
+      const imageUrl = req.file ? getFileUrl(req, req.file) : null;
 
       const user = await User.create({
         username,
@@ -97,6 +101,7 @@ module.exports = {
         password: hashedPassword,
         location,
         isVerified: true,
+        profilePicture: imageUrl,
       });
 
       res.status(201).json({
