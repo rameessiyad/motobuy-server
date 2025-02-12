@@ -133,7 +133,7 @@ module.exports = {
         });
       } else {
         //generate token
-        const token = generateToken(user._id);
+        const token = generateToken(res, user._id);
 
         res.status(200).json({
           success: true,
