@@ -1,4 +1,5 @@
 const User = require("../models/user-model");
+const { getFileUrl } = require("../utils/image-upload");
 
 module.exports = {
   //@desc get user profile by id
@@ -20,14 +21,27 @@ module.exports = {
   //@access private
   updateUser: async (req, res, next) => {
     try {
-      const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-        runValidators: true,
-      });
+      const user = await User.findById(req.params.id);
+      if (!user) return next({ statusCode: 404, message: "User not found" });
+
+      //image url generation
+      const imageUrl = req.file ? getFileUrl(req, req.file) : null;
+
+      const updatedUser = await User.findByIdAndUpdate(
+        req.params.id,
+        {
+          username: req.body.username || user.username,
+          email: req.body.email || user.email,
+          phoneNumber: req.body.phoneNumber || user.phoneNumber,
+          location: req.body.location || user.location,
+          profilePicture: imageUrl || user.profilePicture,
+        },
+        { new: true }
+      );
 
       res.status(200).json({
         success: true,
-        data: user,
+        data: updatedUser,
         message: "profile updated successfully",
       });
     } catch (error) {
