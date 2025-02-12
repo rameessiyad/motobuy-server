@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bikeSchema = new mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
       min: 3,
@@ -60,9 +60,9 @@ const bikeSchema = new mongoose.Schema(
       required: true,
     },
 
-    owner: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+    ownership: {
+      type: String,
+      required: true,
     },
 
     status: {
