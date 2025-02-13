@@ -4,6 +4,7 @@ const {
   postAd,
   editAd,
   deleteAd,
+  getAdBySearch,
 } = require("../controllers/bike-controller");
 const { authMiddleware } = require("../middleware/authMiddleware");
 const { upload } = require("../utils/image-upload");

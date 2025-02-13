@@ -31,7 +31,9 @@ module.exports = {
   //@access private admin
   getReportedAds: async (req, res, next) => {
     try {
-      const reportedAds = await Ads.find({ status: "reported" });
+      const reportedAds = await Ads.find({ status: "reported" }).sort({
+        createdAt: -1,
+      });
 
       res.status(201).json({
         success: true,

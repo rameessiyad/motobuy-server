@@ -51,16 +51,27 @@ module.exports = {
     }
   },
 
-  //get all ads
-  //GET /api/v1/bike
+  //get all ads & ads by search
+  //GET /api/v1/bike?name=adName&state=state&district=district
   // @access Public
   getAds: async (req, res, next) => {
     try {
-      const ads = await Bike.find();
+      const { name, state, district } = req.query;
+
+      const filter = {};
+
+      if (name) filter.name = { $regex: name, $options: "i" };
+      if (state) filter.state = { $regex: state, $options: "i" };
+      if (district) filter.district = { $regex: district, $options: "i" };
+
+      const ads = await Bike.find(filter);
+
+      if (!ads.length)
+        return next({ statusCode: 404, message: "No ads found" });
       res.status(200).json({
         success: true,
         message: "Ads fetched successfully",
-        data: addAbortSignal,
+        data: ads,
       });
     } catch (error) {
       next(error);
