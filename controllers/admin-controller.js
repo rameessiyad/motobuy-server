@@ -26,6 +26,22 @@ module.exports = {
     }
   },
 
+  //get all users
+  //GET /api/v1/admin/users
+  //@access private admin
+  getAllUsers: async (req, res, next) => {
+    try {
+      const users = await User.find().sort({ createdAt: -1 });
+      res.status(201).json({
+        success: true,
+        message: "All users fetched",
+        data: users,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
   //get reported ads
   //GET /api/v1/admin/reported-ads
   //@access private admin
