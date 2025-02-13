@@ -67,7 +67,7 @@ const bikeSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: ["Available", "Sold"],
+      enum: ["Available", "Sold", "expired", "reported"],
       default: "Available",
     },
 
