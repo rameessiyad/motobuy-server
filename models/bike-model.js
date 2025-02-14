@@ -81,4 +81,6 @@ const bikeSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+bikeSchema.index({ title: "text", state: 1, district: 1, city: 1 });
+
 module.exports = mongoose.model("Bike", bikeSchema);

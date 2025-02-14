@@ -60,9 +60,9 @@ module.exports = {
 
       const filter = {};
 
-      if (name) filter.name = { $regex: name, $options: "i" };
-      if (state) filter.state = { $regex: state, $options: "i" };
-      if (district) filter.district = { $regex: district, $options: "i" };
+      if (name) filter.$text = { $search: name };
+      if (state) filter.state = state;
+      if (district) filter.district = district;
 
       const ads = await Bike.find(filter);
 
