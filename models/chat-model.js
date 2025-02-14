@@ -27,6 +27,9 @@ const chatSchema = new mongoose.Schema(
           type: Date,
           default: Date.now,
         },
+        latestMessage: {
+          type: String,
+        },
       },
     ],
   },
